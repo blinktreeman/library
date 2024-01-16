@@ -9,5 +9,6 @@ public interface IIssueService {
     Optional<Issue> save(Issue issue);
     Optional<Issue> findById(UUID uuid);
     Iterable<Issue> findAll();
+    Issue update(Issue issue);
     void deleteById(UUID uuid);
 }

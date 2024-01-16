@@ -30,9 +30,11 @@ public class IssueServiceImpl implements IIssueService {
     public Optional<Issue> save(Issue issue) {
         /* 3.3** Пункт 2.1 расширить параметром, сколько книг может быть на руках у пользователя. */
         List<Issue> readerIssues = (List<Issue>) repository.findAllByReader(issue.getReader());
-        return readerIssues.size() >= MAX_ALLOWED_BOOKS ?
-                Optional.empty() :
-                Optional.of(repository.save(issue));
+        if (readerIssues.size() >= MAX_ALLOWED_BOOKS) {
+            return Optional.empty();
+        }
+        issue.getReader().getIssues().add(issue);
+        return Optional.of(repository.save(issue));
     }
 
     @Override
@@ -45,8 +47,18 @@ public class IssueServiceImpl implements IIssueService {
         return repository.findAll();
     }
 
+    public Issue update(Issue issue) {
+        return repository.findById(issue.getUuid())
+                .map(value -> repository.save(issue))
+                .orElseThrow(() -> new RuntimeException("Issue not found"));
+    }
+
     @Override
     public void deleteById(UUID uuid) {
+        Issue issue = repository
+                .findById(uuid)
+                .orElseThrow(() -> new RuntimeException("Issue not found"));
+        issue.getReader().getIssues().remove(issue);
         repository.deleteById(uuid);
     }
 }

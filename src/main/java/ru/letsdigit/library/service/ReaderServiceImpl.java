@@ -2,11 +2,13 @@ package ru.letsdigit.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.letsdigit.library.entity.Issue;
 import ru.letsdigit.library.entity.Reader;
 import ru.letsdigit.library.repository.IReaderRepository;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ReaderServiceImpl implements IService<Reader> {
@@ -26,6 +28,15 @@ public class ReaderServiceImpl implements IService<Reader> {
     @Override
     public Optional<Reader> findById(UUID uuid) {
         return repository.findById(uuid);
+    }
+
+    public Iterable<Issue> notReturnedBooksByReaderId(UUID uuid) {
+        return repository.findById(uuid).map(value -> value
+                .getIssues()
+                .stream()
+                .filter(issue -> issue.getReturnedAt() == null)
+                .collect(Collectors.toList()))
+                .orElseThrow(() -> new RuntimeException("Reader not found"));
     }
 
     @Override

@@ -21,4 +21,7 @@ public class Reader implements Serializable {
 
     private String firstName;
     private String lastName;
+
+    @OneToMany(mappedBy = "issue")
+    private Set<Issue> issues;
 }
