@@ -1,5 +1,8 @@
 package ru.letsdigit.library.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,7 +22,7 @@ public class Issue implements Serializable {
     private Book book;
 
     @ManyToOne
-    @JoinColumn(name = "reader_uuid", nullable = false)
+    @JsonBackReference
     private Reader reader;
 
     /* 3.1* В Issue поле timestamp разбить на 2: issued_at, returned_at - дата выдачи и дата возврата */

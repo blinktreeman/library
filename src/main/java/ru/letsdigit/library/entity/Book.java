@@ -4,13 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Book implements Serializable {
     @Id
@@ -18,4 +19,8 @@ public class Book implements Serializable {
     private UUID uuid;
 
     private String bookTitle;
+
+    public Book(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
 }
