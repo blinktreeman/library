@@ -40,13 +40,15 @@ public class ReaderController {
 
     /* 2.2 В сервис читателя добавить ручку GET /reader/{id}/issue - вернуть список всех выдачей для данного читателя */
     @GetMapping(value = "/{id}/issue")
-    public ResponseEntity<Iterable<Issue>> notReturnedBooksByReaderId(@PathVariable UUID id) {
+    public ResponseEntity<List<Issue>> notReturnedBooksByReaderId(@PathVariable UUID id) {
         Optional<List<Issue>> issues = service.findById(id).map(value -> value
                 .getIssues()
                 .stream()
                 .filter(issue -> issue.getReturnedAt() == null)
                 .collect(Collectors.toList()));
-        return issues.map(value -> )
+        return issues
+                .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping(value = "/all")
