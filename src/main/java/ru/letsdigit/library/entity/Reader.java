@@ -1,13 +1,9 @@
 package ru.letsdigit.library.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,9 +21,19 @@ public class Reader implements Serializable {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "reader")
+    @OneToMany(mappedBy = "reader", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Issue> issues = new HashSet<>();
+
+    public void addIssue(Issue issue) {
+        issues.add(issue);
+        issue.setReader(this);
+    }
+
+    public void removeIssue(Issue issue) {
+        issues.remove(issue);
+        issue.setReader(null);
+    }
 
     public Reader(String firstName, String lastName) {
         this.firstName = firstName;

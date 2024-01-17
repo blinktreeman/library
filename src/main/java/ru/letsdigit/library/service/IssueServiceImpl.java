@@ -33,8 +33,9 @@ public class IssueServiceImpl implements IIssueService {
         if (readerIssues.size() >= MAX_ALLOWED_BOOKS) {
             return Optional.empty();
         }
-        issue.getReader().getIssues().add(issue);
-        return Optional.of(repository.save(issue));
+        Issue savedIssue = repository.save(issue);
+        savedIssue.getReader().addIssue(savedIssue);
+        return Optional.of(savedIssue);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class IssueServiceImpl implements IIssueService {
         Issue issue = repository
                 .findById(uuid)
                 .orElseThrow(() -> new RuntimeException("Issue not found"));
-        issue.getReader().getIssues().remove(issue);
+        issue.getReader().removeIssue(issue);
         repository.deleteById(uuid);
     }
 }
