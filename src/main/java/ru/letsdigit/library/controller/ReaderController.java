@@ -38,13 +38,15 @@ public class ReaderController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /* 2.2 В сервис читателя добавить ручку GET /reader/{id}/issue - вернуть список всех выдачей для данного читателя */
+    /* 2.2 В сервис читателя добавить ручку GET /reader/{id}/issue
+     * - вернуть список всех выдачей для данного читателя
+     */
     @GetMapping(value = "/{id}/issue")
     public ResponseEntity<List<Issue>> notReturnedBooksByReaderId(@PathVariable UUID id) {
         Optional<List<Issue>> issues = service.findById(id).map(value -> value
                 .getIssues()
                 .stream()
-                .filter(issue -> issue.getReturnedAt() == null)
+                .filter(issue -> issue.getReturnedAt() == null) // Только не сданные книги
                 .collect(Collectors.toList()));
         return issues
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
