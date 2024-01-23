@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value = "/book")
+@RequestMapping(value = "/api/v1/book")
 public class BookController {
 
     private final IService<Book> service;
