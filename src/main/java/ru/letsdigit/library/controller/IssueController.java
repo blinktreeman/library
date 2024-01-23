@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value = "/issue")
+@RequestMapping(value = "/api/v1/issue")
 public class IssueController {
 
     private final IIssueService service;

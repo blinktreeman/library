@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(value = "/reader")
+@RequestMapping(value = "/api/v1/reader")
 public class ReaderController {
 
     private final IService<Reader> service;
