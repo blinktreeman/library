@@ -18,7 +18,7 @@ public class SecurityConfig {
                         .requestMatchers("/ui/issue/**").hasAuthority("admin")
                         /* 3.4* Ресурсы читателей (reader) доступны всем обладателям роли reader
                          !! добавлен админ к заданию */
-                        .requestMatchers("/ui/reader/**").hasAnyRole("reader", "admin")
+                        .requestMatchers("/ui/reader/**").hasAnyAuthority("reader", "admin")
                         // 3.5* Ресурсы книг (books) доступны всем авторизованным пользователям
                         .requestMatchers("/ui/book/**").authenticated()
                         .anyRequest().denyAll())
