@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.letsdigit.library.entity.Book;
-import ru.letsdigit.library.service.IService;
+import ru.letsdigit.library.service.LibraryService;
 
 /*
  * 1. В предыдущий проект (где была библиотека с книгами, выдачами и читателями) добавить следующие рерурсы,
@@ -22,11 +22,11 @@ import ru.letsdigit.library.service.IService;
 @RequestMapping(value = "/ui/book")
 public class BookUIController {
 
-    private final IService<Book> service;
+    private final LibraryService<Book> libraryService;
 
     @Autowired
-    public BookUIController(IService<Book> service) {
-        this.service = service;
+    public BookUIController(LibraryService<Book> libraryService) {
+        this.libraryService = libraryService;
     }
 
     /*
@@ -35,7 +35,7 @@ public class BookUIController {
     */
     @GetMapping(value = "/all")
     public String findAll(Model model) {
-        model.addAttribute("books", service.findAll());
+        model.addAttribute("books", libraryService.findAll());
         return "books";
     }
 }

@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.letsdigit.library.service.IIssueService;
+import ru.letsdigit.library.service.IssueService;
 
 @Controller
 @RequestMapping(value = "/ui/issue")
 public class IssueUIController {
 
-    private final IIssueService service;
+    private final IssueService service;
 
     @Autowired
-    public IssueUIController(IIssueService service) {
+    public IssueUIController(IssueService service) {
         this.service = service;
     }
 
