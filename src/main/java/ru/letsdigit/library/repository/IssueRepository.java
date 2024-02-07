@@ -8,6 +8,6 @@ import ru.letsdigit.library.entity.Reader;
 import java.util.UUID;
 
 @Repository
-public interface IIssueRepository extends JpaRepository<Issue, UUID> {
+public interface IssueRepository extends JpaRepository<Issue, UUID> {
     Iterable<Issue> findAllByReader(Reader reader);
 }

@@ -4,19 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.letsdigit.library.entity.Issue;
 import ru.letsdigit.library.entity.Reader;
-import ru.letsdigit.library.repository.IReaderRepository;
+import ru.letsdigit.library.repository.ReaderRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class ReaderServiceImpl implements IService<Reader> {
+public class ReaderService implements LibraryService<Reader> {
 
-    private final IReaderRepository repository;
+    private final ReaderRepository repository;
 
     @Autowired
-    public ReaderServiceImpl(IReaderRepository repository) {
+    public ReaderService(ReaderRepository repository) {
         this.repository = repository;
     }
 

@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.letsdigit.library.entity.Issue;
-import ru.letsdigit.library.repository.IIssueRepository;
+import ru.letsdigit.library.repository.IssueRepository;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class IssueServiceImpl implements IIssueService {
+public class IssueServiceImpl implements IssueService {
 
-    private final IIssueRepository repository;
+    private final IssueRepository repository;
 
     /* Должно задаваться в конфигурации (параметр application.issue.max-allowed-books).
      * Если параметр не задан - то использовать значение 1
@@ -22,7 +22,7 @@ public class IssueServiceImpl implements IIssueService {
     private int MAX_ALLOWED_BOOKS = 1;
 
     @Autowired
-    public IssueServiceImpl(IIssueRepository repository) {
+    public IssueServiceImpl(IssueRepository repository) {
         this.repository = repository;
     }
 

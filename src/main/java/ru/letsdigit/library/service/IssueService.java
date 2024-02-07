@@ -5,7 +5,7 @@ import ru.letsdigit.library.entity.Issue;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface IIssueService {
+public interface IssueService {
     Optional<Issue> save(Issue issue);
     Optional<Issue> findById(UUID uuid);
     Iterable<Issue> findAll();

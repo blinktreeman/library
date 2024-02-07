@@ -3,23 +3,22 @@ package ru.letsdigit.library.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.letsdigit.library.entity.Issue;
-import ru.letsdigit.library.service.IIssueService;
+import ru.letsdigit.library.service.IssueService;
 
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping(value = "/api/v1/issue")
 public class IssueController {
 
-    private final IIssueService service;
+    private final IssueService service;
 
     @Autowired
-    public IssueController(IIssueService service) {
+    public IssueController(IssueService service) {
         this.service = service;
     }
 

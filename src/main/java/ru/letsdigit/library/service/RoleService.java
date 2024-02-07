@@ -2,34 +2,37 @@ package ru.letsdigit.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.letsdigit.library.entity.Book;
-import ru.letsdigit.library.repository.IBookRepository;
+import ru.letsdigit.library.entity.Role;
+import ru.letsdigit.library.repository.RoleRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class BookServiceImpl implements IService<Book> {
-
-    private final IBookRepository repository;
+public class RoleService implements LibraryService<Role> {
+    private final RoleRepository repository;
 
     @Autowired
-    public BookServiceImpl(IBookRepository repository) {
+    public RoleService(RoleRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public Book save(Book entity) {
+    public Role save(Role entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Optional<Book> findById(UUID uuid) {
+    public Optional<Role> findById(UUID uuid) {
         return repository.findById(uuid);
     }
 
+    public Optional<Role> findFirstByRoleTitle(String title) {
+        return repository.findFirstByRoleTitle(title);
+    }
+
     @Override
-    public Iterable<Book> findAll() {
+    public Iterable<Role> findAll() {
         return repository.findAll();
     }
 
