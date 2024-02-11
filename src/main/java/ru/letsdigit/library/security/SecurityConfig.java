@@ -25,7 +25,7 @@ public class SecurityConfig {
                         .requestMatchers("/ui/book/**").authenticated()
                         .anyRequest().denyAll())
                 .formLogin(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable);
+                .csrf((csrf) -> csrf.ignoringRequestMatchers("/api/v1/**"));
         return http.build();
     }
 }
