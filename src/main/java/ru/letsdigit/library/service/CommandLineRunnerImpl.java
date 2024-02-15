@@ -2,8 +2,8 @@ package ru.letsdigit.library.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.letsdigit.library.entity.Book;
 import ru.letsdigit.library.entity.CustomUser;
@@ -52,26 +52,26 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
                 new Role("reader")
         ));
 
-        books.forEach(bookService::save);
-        readers.forEach(readerService::save);
-        roles.forEach(roleService::save);
+//        books.forEach(bookService::save);
+//        readers.forEach(readerService::save);
+//        roles.forEach(roleService::save);
 
         /* Читатель */
         CustomUser ivanov = new CustomUser();
         ivanov.setUserLogin("ivanov");
-        ivanov.setPassword(getPasswordEncoder().encode("readerPass"));
-        ivanov.getRoles().add(roleService.findFirstByRoleTitle("reader").get());
-        userService.save(ivanov);
+//        ivanov.setPassword(getPasswordEncoder().encode("readerPass"));
+//        ivanov.getRoles().add(roleService.findFirstByRoleTitle("reader").get());
+//        userService.save(ivanov);
 
         /* Админ */
         CustomUser sidorov = new CustomUser();
         sidorov.setUserLogin("sidorov");
-        sidorov.setPassword(getPasswordEncoder().encode("adminPass"));
-        sidorov.getRoles().add(roleService.findFirstByRoleTitle("admin").get());
-        userService.save(sidorov);
+//        sidorov.setPassword(getPasswordEncoder().encode("adminPass"));
+//        sidorov.getRoles().add(roleService.findFirstByRoleTitle("admin").get());
+//        userService.save(sidorov);
     }
 
-    private PasswordEncoder getPasswordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+//    private PasswordEncoder getPasswordEncoder() {
+//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//    }
 }
