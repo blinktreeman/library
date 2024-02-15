@@ -1,6 +1,8 @@
 package ru.letsdigit.library.uiController;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +21,7 @@ import ru.letsdigit.library.service.LibraryService;
  */
 
 @Controller
-@RequestMapping(value = "/ui/book")
+@RequestMapping(value = "/ui/book", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class BookUIController {
 
     private final LibraryService<Book> libraryService;

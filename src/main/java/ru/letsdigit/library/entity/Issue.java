@@ -1,6 +1,9 @@
 package ru.letsdigit.library.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,6 +14,10 @@ import java.util.UUID;
 
 @Data
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "uuid"
+)
 public class Issue implements Serializable {
     @Id
     @GeneratedValue
@@ -21,7 +28,7 @@ public class Issue implements Serializable {
     private Book book;
 
     @ManyToOne
-    @JsonBackReference
+//    @JsonBackReference
     private Reader reader;
 
     /* 3.1* В Issue поле timestamp разбить на 2: issued_at, returned_at - дата выдачи и дата возврата */
